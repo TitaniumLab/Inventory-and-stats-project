@@ -28,8 +28,12 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         quarterOffset = new Vector2Int(xOffset, yOffset);
         if (ItemDragManager.isItemHolder)
         {
-            totalOffsetX = parent.GetComponent<InventoryCell>().cellCoordinates.x + (ItemDragManager.currentItemSize.x % 2 == 0 ? quarterOffset.x : 0);
-            totalOffsetY = parent.GetComponent<InventoryCell>().cellCoordinates.y + (ItemDragManager.currentItemSize.y % 2 == 0 ? quarterOffset.y : 0);
+            //totalOffsetX = parent.GetComponent<InventoryCell>().cellCoordinates.x + (ItemDragManager.currentItemSize.x % 2 == 0 ? quarterOffset.x : 0);
+            //totalOffsetY = parent.GetComponent<InventoryCell>().cellCoordinates.y + (ItemDragManager.currentItemSize.y % 2 == 0 ? quarterOffset.y : 0);
+            totalOffsetX = parent.GetComponent<InventoryCell>().cellCoordinates.x -
+                (ItemDragManager.currentItemSize.x % 2 == 0 ? ItemDragManager.currentItemSize.x / 2 + quarterOffset.x : (ItemDragManager.currentItemSize.x - 1) / 2);
+            totalOffsetY = parent.GetComponent<InventoryCell>().cellCoordinates.y -
+                (ItemDragManager.currentItemSize.y % 2 == 0 ? ItemDragManager.currentItemSize.y / 2 + quarterOffset.y : (ItemDragManager.currentItemSize.y - 1) / 2);
             for (int x = totalOffsetX; x < totalOffsetX + ItemDragManager.currentItemSize.x; x++)
             {
                 for (int y = totalOffsetY; y < totalOffsetY + ItemDragManager.currentItemSize.y; y++)

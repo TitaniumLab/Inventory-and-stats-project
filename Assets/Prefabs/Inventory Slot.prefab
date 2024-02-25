@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5021011118048092014}
-  xOffset: -1
-  yOffset: 0
+  xOffset: 0
+  yOffset: -1
 --- !u!1 &4125074036998838926
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5021011118048092014}
-  xOffset: 0
-  yOffset: -1
+  xOffset: -1
+  yOffset: 0
 --- !u!1 &5021011118048092014
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,8 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5021011118048092014}
-  xOffset: 0
-  yOffset: 0
+  xOffset: -1
+  yOffset: -1
 --- !u!1 &8414759217943520725
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,5 +480,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 5021011118048092014}
-  xOffset: -1
-  yOffset: -1
+  xOffset: 0
+  yOffset: 0

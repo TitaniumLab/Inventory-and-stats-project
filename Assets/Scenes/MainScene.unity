@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory: {fileID: 1023997059}
   itemLayer: {fileID: 197688319}
-  defaultItem: {fileID: 6106439637674922966, guid: eb2c846f1bf98d9429ed61a09072f8e6, type: 3}
+  defaultItem: {fileID: 6106439637674922966, guid: 689ffe1376e9ee1418104850d358d737, type: 3}
 --- !u!225 &1842278634
 CanvasGroup:
   m_ObjectHideFlags: 0

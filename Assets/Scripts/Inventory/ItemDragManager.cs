@@ -40,8 +40,10 @@ public class ItemDragManager : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         image.raycastTarget = true;
         GetComponent<RectTransform>().pivot = new Vector2(0, 1);
         //transform.position = QuarterCell.parentCoordinates;
-        int totalOffsetX = InventoryCell.cellPos.x - ((itemSize.x - QuarterCell.quarterOffset.x) % 2 == 0 ? 0 : 1);
-        int totalOffsetY = InventoryCell.cellPos.y - ((itemSize.y - QuarterCell.quarterOffset.y) % 2 == 0 ? 0 : 1);
+        //int totalOffsetX = InventoryCell.cellPos.x - ((itemSize.x - QuarterCell.quarterOffset.x) % 2 == 0 ? 0 : 1);
+        //int totalOffsetY = InventoryCell.cellPos.y - ((itemSize.y - QuarterCell.quarterOffset.y) % 2 == 0 ? 0 : 1);
+        int totalOffsetX = InventoryCell.cellPos.x - (itemSize.x % 2 == 0 ? itemSize.x / 2 + QuarterCell.quarterOffset.x : (itemSize.x - 1) / 2);
+        int totalOffsetY = InventoryCell.cellPos.y - (itemSize.y % 2 == 0 ? itemSize.y / 2 + QuarterCell.quarterOffset.y : (itemSize.y - 1) / 2);
         GetComponent<RectTransform>().anchoredPosition = InventoryManager.inventoryCellsGrid[totalOffsetX, totalOffsetY].GetComponent<RectTransform>().anchoredPosition;
         Color color = image.color;
         color.a = 1f;
