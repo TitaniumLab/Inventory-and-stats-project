@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +7,10 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventory;
+    [SerializeField]
+    private GameObject itemLayer;
+    [SerializeField]
+    private GameObject defaultItem;
 
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -16,8 +18,10 @@ public class UiManager : MonoBehaviour
 
     void Start()
     {
+        //not moving on ui click
         m_Raycaster = GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
+
     }
 
 
@@ -25,8 +29,21 @@ public class UiManager : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             inventory.SetActive(false);
-
     }
+
+    /// <summary>
+    /// Get some item in inventory
+    /// </summary>
+    public void GetItem()
+    {
+        Transform cellTransform = InventoryManager.inventoryCellsGrid[0, 0].transform;
+        GameObject item = Instantiate(defaultItem, itemLayer.transform);
+        item.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
+            inventory.GetComponent<InventoryManager>().inventoryCellSize * item.GetComponent<ItemDragManager>().itemSize[0]);
+        item.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
+            inventory.GetComponent<InventoryManager>().inventoryCellSize * item.GetComponent<ItemDragManager>().itemSize[1]);
+    }
+
     /// <summary>
     /// check if cursor on ui
     /// </summary>
