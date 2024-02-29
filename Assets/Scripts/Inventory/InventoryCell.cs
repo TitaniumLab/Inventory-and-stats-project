@@ -1,56 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class InventoryCell : MonoBehaviour
 {
-    //[HideInInspector]
-    public Vector2Int cellCoordinates;
-    public static Vector2Int cellPos;
-    private Image image;
-    private Color defaultColor;
-    private static Color greenCellColor = new Color(0.7f, 1f, 0),
-    redCellColor = new Color(1f, 0.23f, 0);
+    public Vector2Int cellCoordinates;//cell coordinates in the array
+    private Image image;//image of cell
+    public GameObject storedItem;//the item that is in the cell
+    private Color defaultColor;//default item color
+    private static Color greenCellColor = new Color(0.7f, 1f, 0), redCellColor = new Color(1f, 0.23f, 0);//item colors on moving
 
 
     private void Start()
     {
-
         image = GetComponent<Image>();
         defaultColor = image.color;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (ItemDragManager.isItemHolder)
-        {
-
-            cellPos = cellCoordinates;
-
-
-
-
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (ItemDragManager.isItemHolder)
-        {
-        }
-    }
-
-    public void SetColor()
+    public void SetColorGreen()
     {
         image.color = greenCellColor;
     }
 
-    public void SetDefaultColor()
+    public void SetColorDefault()
     {
         image.color = defaultColor;
+    }
+
+    public void SetColorRed()
+    {
+        image.color = redCellColor;
     }
 }

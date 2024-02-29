@@ -88,9 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0716e1eb513452c4bbc21fd52a57105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 5021011118048092014}
-  xOffset: 0
-  yOffset: -1
+  quarterOffset: {x: 0, y: -1}
+  parent: {fileID: -8973261164440802852}
 --- !u!1 &4125074036998838926
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,9 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0716e1eb513452c4bbc21fd52a57105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 5021011118048092014}
-  xOffset: -1
-  yOffset: 0
+  quarterOffset: {x: -1, y: 0}
+  parent: {fileID: -8973261164440802852}
 --- !u!1 &5021011118048092014
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellCoordinates: {x: 0, y: 0}
+  storedItem: {fileID: 0}
 --- !u!114 &2212924852963170025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,9 +387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0716e1eb513452c4bbc21fd52a57105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 5021011118048092014}
-  xOffset: -1
-  yOffset: -1
+  quarterOffset: {x: -1, y: -1}
+  parent: {fileID: -8973261164440802852}
 --- !u!1 &8414759217943520725
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +477,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0716e1eb513452c4bbc21fd52a57105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 5021011118048092014}
-  xOffset: 0
-  yOffset: 0
+  quarterOffset: {x: 0, y: 0}
+  parent: {fileID: -8973261164440802852}

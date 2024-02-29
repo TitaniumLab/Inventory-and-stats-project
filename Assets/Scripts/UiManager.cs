@@ -7,10 +7,12 @@ public class UiManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject inventory;
+    private InventoryManager inventoryManager;
     [SerializeField]
     private GameObject itemLayer;
     [SerializeField]
     private GameObject defaultItem;
+    private int itemCounter;
 
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -21,7 +23,8 @@ public class UiManager : MonoBehaviour
         //not moving on ui click
         m_Raycaster = GetComponent<GraphicRaycaster>();
         m_EventSystem = GetComponent<EventSystem>();
-
+        inventoryManager = inventory.GetComponent<InventoryManager>();
+        itemCounter = 0;
     }
 
 
@@ -36,12 +39,56 @@ public class UiManager : MonoBehaviour
     /// </summary>
     public void GetItem()
     {
-        Transform cellTransform = InventoryManager.inventoryCellsGrid[0, 0].transform;
         GameObject item = Instantiate(defaultItem, itemLayer.transform);
-        item.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
-            inventory.GetComponent<InventoryManager>().inventoryCellSize * item.GetComponent<ItemDragManager>().itemSize[0]);
-        item.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,
-            inventory.GetComponent<InventoryManager>().inventoryCellSize * item.GetComponent<ItemDragManager>().itemSize[1]);
+        ItemDragManager itemDragManager = item.GetComponent<ItemDragManager>();
+        RectTransform itemRectTransform = item.GetComponent<RectTransform>();
+
+        //-----------
+        item.name += itemCounter;
+        itemCounter++;
+
+        //set item size (pixel)
+        itemRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryManager.inventoryCellSize * itemDragManager.itemSize[0]);
+        itemRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryManager.inventoryCellSize * itemDragManager.itemSize[1]);
+
+        Vector2Int pose = FindPoseForItem(itemDragManager);
+        if (pose == -Vector2Int.one)
+            Destroy(item);
+        else
+            itemDragManager.SetItemInCells(pose);
+    }
+
+    private Vector2Int FindPoseForItem(ItemDragManager item)
+    {
+        for (int x = 0; x < InventoryManager.inventoryCellsGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < InventoryManager.inventoryCellsGrid.GetLength(1); y++)
+            {
+                //if cell empty check other cells by item size
+                if (InventoryManager.inventoryCellsGrid[x, y].storedItem == null &&
+                    (x + item.itemSize.x - 1) < InventoryManager.inventoryCellsGrid.GetLength(0) &&
+                    (y + item.itemSize.y - 1) < InventoryManager.inventoryCellsGrid.GetLength(1))
+                {
+                    for (int localX = x; localX < x + item.itemSize.x; localX++)
+                    {
+                        for (int localY = y; localY < y + item.itemSize.y; localY++)
+                        {
+                            //if one of cells not empty start next iteration
+                            if (InventoryManager.inventoryCellsGrid[localX, localY].storedItem != null)
+                            {
+                                localY = y + item.itemSize.y;
+                                localX = x + item.itemSize.x;
+                            }
+                            else if (localY == y + item.itemSize.y - 1 &&
+                                localX == x + item.itemSize.x - 1 &&
+                                InventoryManager.inventoryCellsGrid[localX, localY].storedItem == null)
+                            { return new Vector2Int(x, y); }
+                        }
+                    }
+                }
+            }
+        }
+        return -Vector2Int.one;
     }
 
     /// <summary>
