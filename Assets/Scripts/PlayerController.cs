@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    NavMeshAgent agent;
+    private NavMeshAgent agent;
+    [SerializeField]
+    private UiManager uiManager;
+    private bool isMoving = false;
 
     private void Start()
     {
@@ -14,13 +15,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 100;
-        Vector3 mouseInWorld = Camera.main.ScreenToWorldPoint(mousePos);
-        RaycastHit hit;
-        if (Input.GetMouseButton(0) && Physics.Raycast(Camera.main.transform.position, mouseInWorld, out hit, 100))
+        if (Input.GetMouseButtonDown(0) && !uiManager.IsCursorOnUI())
+            isMoving = true;
+        if (Input.GetMouseButtonUp(0))
+            isMoving = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (isMoving)
         {
-            agent.destination = hit.point;
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 100;
+            Vector3 mouseInWorld = Camera.main.ScreenToWorldPoint(mousePos);
+            RaycastHit hit;
+            Physics.Raycast(Camera.main.transform.position, mouseInWorld, out hit);
+            if (hit.collider != null)
+            {
+                agent.destination = hit.point;
+            }
         }
     }
 }
