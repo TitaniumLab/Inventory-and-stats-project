@@ -89,6 +89,5 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
             }
         }
-        Debug.Log($"Items Under dragged item: {itemsInCells.Count} Position: {totalItemPos}");
     }
 }

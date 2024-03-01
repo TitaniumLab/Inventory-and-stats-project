@@ -103,7 +103,6 @@ public class ItemDragManager : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             SetItemInCells(QuarterCell.totalItemPos);
             currentItemSize = Vector2Int.zero;
             OnMovingItem(true);
-            Debug.Log("ןונגûי גûחמג");
         }
         //if there is only 1 item present, switch places with it
         if (instance == this && Input.GetMouseButtonDown(0) &&
