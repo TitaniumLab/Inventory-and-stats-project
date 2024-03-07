@@ -4,21 +4,29 @@ using UnityEngine.UI;
 public class InventoryManager : MonoBehaviour
 {
     public float inventoryCellSize;
-    [SerializeField]
-    private Vector2Int inventoryWindowGrid;
+    [SerializeField] private Vector2Int inventoryWindowGrid;
     public static InventoryCell[,] inventoryCellsGrid;
-    [SerializeField]
-    private GameObject cellPrefab;
+    [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private RectTransform inventoryStorage;
+    [SerializeField] private RectTransform itemLayer;
+    [SerializeField] private RectTransform characterSlots;
+    //private RectTransform canvasRectTransform;
 
-
-    private void Awake()
+    private void Start()
     {
         //set inventory size
         float inventoryWidth = inventoryCellSize * inventoryWindowGrid.x;
         float inventoryHight = inventoryCellSize * inventoryWindowGrid.y;
+        //canvasRectTransform = GetComponentInParent<RectTransform>();
+
         RectTransform inventoryRect = GetComponent<RectTransform>();
         inventoryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryWidth);
-        inventoryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryHight);
+        //inventoryStorage.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryWidth);
+        inventoryStorage.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryHight);
+        characterSlots.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryRect.rect.height - inventoryHight);
+        //Debug.Log($"{canvasRectTransform.sizeDelta.y}");
+        itemLayer.sizeDelta = inventoryStorage.sizeDelta;
+        //inventoryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryHight);
 
         //Create cells
         GridLayoutGroup gridLayoutGroup = GetComponentInChildren<GridLayoutGroup>();
