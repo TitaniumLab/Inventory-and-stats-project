@@ -55,7 +55,7 @@ public class UiManager : MonoBehaviour
         if (pose == -Vector2Int.one)
             Destroy(item);
         else
-            itemDragManager.SetItemInCells(pose);
+            itemDragManager.SetItemInCells(itemLayer.transform, new Vector2(0, 1), pose);
     }
 
     private Vector2Int FindPoseForItem(ItemDragManager item)

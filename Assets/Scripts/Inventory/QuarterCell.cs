@@ -22,7 +22,11 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        quarterCellInstance = null;
+        if (ItemDragManager.instance != null)
+        {
+            quarterCellInstance = null;
+            ResetCellsColor();
+        }
     }
 
     public void CalcOffset()
@@ -54,14 +58,7 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else if (totalItemPos.y + ItemDragManager.currentItemSize.y > _inventorySizeY)
             totalItemPos.y = _inventorySizeY - ItemDragManager.currentItemSize.y;
 
-        //reset inventory color
-        for (int x = 0; x < _inventorySizeX; x++)
-        {
-            for (int y = 0; y < _inventorySizeY; y++)
-            {
-                InventoryManager.inventoryCellsGrid[x, y].SetColorDefault();
-            }
-        }
+        ResetCellsColor();
 
         //check other items under carried item
         for (int x = totalItemPos.x; x < totalItemPos.x + ItemDragManager.currentItemSize.x; x++)
@@ -89,5 +86,18 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
             }
         }
+    }
+
+    /// <summary>
+    /// Reset color of all cells in inventory.
+    /// </summary>
+    private void ResetCellsColor()
+    {
+        int _inventorySizeX = InventoryManager.inventoryCellsGrid.GetLength(0);
+        int _inventorySizeY = InventoryManager.inventoryCellsGrid.GetLength(1);
+
+        for (int x = 0; x < _inventorySizeX; x++)
+            for (int y = 0; y < _inventorySizeY; y++)
+                InventoryManager.inventoryCellsGrid[x, y].SetColorDefault();
     }
 }

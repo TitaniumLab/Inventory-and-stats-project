@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private RectTransform characterSlots;
     //private RectTransform canvasRectTransform;
 
-    private void Awake()
+    private void Start()
     {
         //set inventory size
         float inventoryWidth = inventoryCellSize * inventoryWindowGrid.x;
@@ -23,7 +23,6 @@ public class InventoryManager : MonoBehaviour
         inventoryRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryWidth);
         //inventoryStorage.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryWidth);
         inventoryStorage.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryHight);
-        Debug.Log($"{inventoryStorage.sizeDelta.y}");
         characterSlots.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryRect.rect.height - inventoryHight);
         //Debug.Log($"{canvasRectTransform.sizeDelta.y}");
         itemLayer.sizeDelta = inventoryStorage.sizeDelta;
