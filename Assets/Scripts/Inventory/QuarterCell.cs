@@ -17,15 +17,18 @@ public class QuarterCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             quarterCellInstance = this;
             CalcOffset();
+            Debug.Log("¬ход инстанса");
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (ItemDragManager.instance != null)
+        if (ItemDragManager.instance != null
+        || quarterCellInstance != null)
         {
             quarterCellInstance = null;
             ResetCellsColor();
+            Debug.Log("выход инстанса");
         }
     }
 

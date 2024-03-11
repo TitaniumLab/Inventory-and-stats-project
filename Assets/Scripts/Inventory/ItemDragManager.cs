@@ -187,15 +187,15 @@ public class ItemDragManager : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             transform.position = Input.mousePosition;
 
         //if the cells are empty put the item in inventory
-        if (instance == this && Input.GetMouseButtonDown(0) && QuarterCell.itemsInCells.Count == 0 && QuarterCell.quarterCellInstance != null)
+        if (instance == this && Input.GetMouseButtonDown(0) && QuarterCell.quarterCellInstance != null && QuarterCell.itemsInCells.Count == 0)
         {
             SetItemInCells(itemLayer, inventoryPivot, QuarterCell.totalItemPos);
             currentItemSize = Vector2Int.zero;
             OnMovingItem(true);
         }
         //if there is only 1 item present, switch places with it
-        else if (instance == this && Input.GetMouseButtonDown(0) && QuarterCell.itemsInCells != null &&
-            QuarterCell.itemsInCells.Count == 1 && QuarterCell.itemsInCells[0] != gameObject && QuarterCell.quarterCellInstance != null)
+        else if (instance == this && Input.GetMouseButtonDown(0) && QuarterCell.quarterCellInstance != null && QuarterCell.itemsInCells != null &&
+            QuarterCell.itemsInCells.Count == 1 && QuarterCell.itemsInCells[0] != gameObject)
         {
             QuarterCell.quarterCellInstance.CalcOffset();
             nextInstace = QuarterCell.itemsInCells[0].GetComponent<ItemDragManager>();
